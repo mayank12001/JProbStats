@@ -5,7 +5,7 @@ package com.jprobstats.dataset;
  *
  * @param <T>
  */
-public interface IJProbStatsList<T> {
+public interface IData<T> {
 
 	// access methods
 	

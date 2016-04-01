@@ -3,18 +3,18 @@ package com.jprobstats.dataset;
 import java.util.Iterator;
 import java.util.ListIterator;
 
-public abstract class JProbStatsList<T> implements IJProbStatsList<T> {
+public abstract class DataList<T> implements IData<T> {
 	public abstract T get(int i);
 
 	// inner class
-	private class JProbStatsListIterator implements ListIterator<T> {
+	private class DataListIterator implements ListIterator<T> {
 		int i;
 
-		public JProbStatsListIterator() {
+		public DataListIterator() {
 			i = 0;
 		}
 
-		public JProbStatsListIterator(int index) {
+		public DataListIterator(int index) {
 			i = index;
 		}
 
@@ -57,23 +57,23 @@ public abstract class JProbStatsList<T> implements IJProbStatsList<T> {
 	}
 
 	public ListIterator<T> listIterator() {
-		return new JProbStatsListIterator();
+		return new DataListIterator();
 	}
 
 	public ListIterator<T> listIterator(int index) {
-		return new JProbStatsListIterator(index);
+		return new DataListIterator(index);
 	}
 
 	public Iterator<T> iterator() {
-		return new JProbStatsListIterator();
+		return new DataListIterator();
 	}
 
-	public JProbStatsList<T> include(final T value) {
+	public DataList<T> include(final T value) {
 		return this.append(value);
 	}
 
-	public JProbStatsList<T> append(T value) {
-		return ListFactory.concat(this, value);
+	public DataList<T> append(T value) {
+		return DataFactory.concat(this, value);
 	}
 
 }

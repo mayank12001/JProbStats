@@ -1,6 +1,6 @@
 package com.jprobstats.dataset.impl;
 
-import com.jprobstats.dataset.JProbStatsList;
+import com.jprobstats.dataset.DataList;
 
 /**
  * Tuple :: A tuple is a finite ordered list of elements.
@@ -8,38 +8,38 @@ import com.jprobstats.dataset.JProbStatsList;
  *
  * @param <T>
  */
-public final class Tuple<T> extends JProbStatsList<T> {
+public final class Data<T> extends DataList<T> {
 	public final T[] data;
 
 	// Empty Tuple for some special cases
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	static final Tuple<?> EMPTY_TUPLE = new Tuple(new Object[0]);
+	static final Data<?> EMPTY_TUPLE = new Data(new Object[0]);
 
-	private Tuple(T[] values) {
+	private Data(T[] values) {
 		data = values;
 	}
 	@SuppressWarnings("unchecked")
-	public static <T> Tuple<T> create(T[] values) {
+	public static <T> Data<T> create(T[] values) {
 		int n=values.length;
-		if (n==0) return (Tuple<T>) EMPTY_TUPLE;
+		if (n==0) return (Data<T>) EMPTY_TUPLE;
 		T[] ndata=(T[]) new Object[n];
 		System.arraycopy(values,0,ndata,0,n);
-		return new Tuple<T>(ndata);
+		return new Data<T>(ndata);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static <T> Tuple<T> create(T a) {
+	public static <T> Data<T> create(T a) {
 		T[] ndata=(T[])new Object[1];
 		ndata[0]=a;
-		return new Tuple<T>(ndata);
+		return new Data<T>(ndata);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static <T> Tuple<T> create(T a, T b) {
+	public static <T> Data<T> create(T a, T b) {
 		T[] ndata=(T[])new Object[2];
 		ndata[0]=a;
 		ndata[1]=b;
-		return new Tuple<T>(ndata);
+		return new Data<T>(ndata);
 	}
 	/**
 	 * creating new array with given values.
@@ -50,15 +50,15 @@ public final class Tuple<T> extends JProbStatsList<T> {
 	 * @return new custom list object with new data.
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T> Tuple<T> create(T[] values, int fromIndex, int toIndex) {
+	public static <T> Data<T> create(T[] values, int fromIndex, int toIndex) {
 		int n = toIndex - fromIndex;
 		if (n <= 0)
-			return (Tuple<T>) EMPTY_TUPLE;
+			return (Data<T>) EMPTY_TUPLE;
 		T[] ndata = (T[]) new Object[n];
 		for (int i = 0; i < n; i++) {
 			ndata[i] = values[i + fromIndex];
 		}
-		return new Tuple<T>(ndata);
+		return new Data<T>(ndata);
 	}
 
 	/**
@@ -76,7 +76,7 @@ public final class Tuple<T> extends JProbStatsList<T> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T> Tuple<T> concat(JProbStatsList<T> a, JProbStatsList<T> b) {
+	public static <T> Data<T> concat(DataList<T> a, DataList<T> b) {
 		int as=a.size();
 		int bs=b.size();
 		T[] ndata=(T[]) new Object[as+bs];
@@ -87,7 +87,7 @@ public final class Tuple<T> extends JProbStatsList<T> {
 			ndata[as+i]=b.get(i);
 		}
 
-		return new Tuple<T>(ndata);
+		return new Data<T>(ndata);
 	}
 	
 }
