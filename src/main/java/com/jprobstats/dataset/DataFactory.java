@@ -1,8 +1,8 @@
 package com.jprobstats.dataset;
 
-import com.jprobstats.dataset.impl.CompositeDataList;
-import com.jprobstats.dataset.impl.Data;
-import com.jprobstats.dataset.impl.SingletonDataList;
+import com.jprobstats.dataset.impl.CompositeData;
+import com.jprobstats.dataset.impl.DataSet;
+import com.jprobstats.dataset.impl.SingletonData;
 
 public class DataFactory<T> {
     // creating size of tuple
@@ -20,7 +20,7 @@ public class DataFactory<T> {
      * @param data
      * @return
      */
-    public static <T> DataList<T> createFromArray(T[] data) {
+    public static <T> Data<T> createFromArray(T[] data) {
         return createFromArray(data, 0, data.length);
     }
 
@@ -38,7 +38,7 @@ public class DataFactory<T> {
      * @param toIndex
      * @return
      */
-    public static <T> DataList<T> createFromArray(T[] data, int fromIndex, int toIndex) {
+    public static <T> Data<T> createFromArray(T[] data, int fromIndex, int toIndex) {
         int n = toIndex - fromIndex;
         // TODO if given array size is more than tuple(finite size) then
         // create BlockList with infinite size
@@ -50,9 +50,9 @@ public class DataFactory<T> {
                 if (n == 0)
                     throw new IllegalArgumentException("Given array is empty");
                 if (n == 1)
-                    return SingletonDataList.create(data[fromIndex]);
+                    return SingletonData.create(data[fromIndex]);
             }
-            return Data.create(data, fromIndex, toIndex);
+            return DataSet.create(data, fromIndex, toIndex);
         }
         throw new IllegalArgumentException("Given array size is more than tuple size");
     }
@@ -63,16 +63,16 @@ public class DataFactory<T> {
      * @param value
      * @return
      */
-    public static <T> DataList<T> create(T value) {
-        return SingletonDataList.create(value);
+    public static <T> Data<T> create(T value) {
+        return SingletonData.create(value);
     }
 
-    public static <T> DataList<T> concat(DataList<T> a, T v) {
+    public static <T> Data<T> concat(Data<T> a, T v) {
         return concat(a, DataFactory.create(v));
     }
 
-    public static <T> DataList<T> concat(DataList<T> a, DataList<T> b) {
-        return CompositeDataList.concat(a, b);
+    public static <T> Data<T> concat(Data<T> a, Data<T> b) {
+        return CompositeData.concat(a, b);
     }
 
 }

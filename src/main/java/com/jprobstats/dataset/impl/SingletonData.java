@@ -1,23 +1,23 @@
 package com.jprobstats.dataset.impl;
 
-import com.jprobstats.dataset.DataList;
+import com.jprobstats.dataset.Data;
 
 /**
  * If given array size is 1 then we can create JProbStatsList with SingletonList.
  *
  * @param <T>
  */
-public final class SingletonDataList<T> extends DataList<T> {
+public final class SingletonData<T> extends Data<T> {
 
     final T value;
 
     // Constructor
-    private SingletonDataList(T object) {
+    private SingletonData(T object) {
         value = object;
     }
 
-    public static <T> SingletonDataList<T> create(T object) {
-        return new SingletonDataList<T>(object);
+    public static <T> SingletonData<T> create(T object) {
+        return new SingletonData<T>(object);
     }
 
     @Override
@@ -36,7 +36,7 @@ public final class SingletonDataList<T> extends DataList<T> {
         return false;
     }
 
-    public DataList<T> front() {
+    public Data<T> front() {
         return this;
     }
 
