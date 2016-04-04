@@ -1,13 +1,13 @@
-package com.jprobstats.stats.descriptive;
+/*package com.jprobstats.stats.descriptive;
 
 import com.jprobstats.stats.utils.ResizableDoubleArray;
 
 public class Statistics {
     
     
-    /**
+    *//**
      *  Stored data values
-     */
+     *//*
     private ResizableDoubleArray eDA;
     
     private final UnivariateStatistic maxImpl = new Maximum();
@@ -47,3 +47,4 @@ public class Statistics {
         return eDA.compute(stat);
     }
 }
+*/
