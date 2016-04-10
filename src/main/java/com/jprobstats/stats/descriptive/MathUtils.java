@@ -11,16 +11,15 @@ public class MathUtils {
     public static double sumOfSquares(double[] values) {
         values = evaluateData(values);
         double sumOfSquare = 0;
-        for (int i = 1; i < values.length; i++) {
+        for (int i = 0; i < values.length; i++) {
             sumOfSquare += Math.pow(values[i], 2);
         }
         return sumOfSquare;
     }
 
-    @SuppressWarnings("null")
     private static double[] evaluateData(double[] values) {
-        double[] validNum = null;
-        for (int i = 1; i < values.length; i++) {
+        double[] validNum = new double[values.length];
+        for (int i = 0; i < values.length; i++) {
             if (!Double.isNaN(values[i])) {
                 validNum[i] = values[i];
             }
@@ -28,7 +27,6 @@ public class MathUtils {
         return validNum;
     }
 
-    @SuppressWarnings("unused")
     public static double median(double[] values) {
         double median = 0;
         double[] validNum = evaluateData(values);
@@ -56,6 +54,4 @@ public class MathUtils {
         }
         return median;
     }
-
-
 }
