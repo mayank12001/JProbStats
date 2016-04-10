@@ -28,6 +28,7 @@ public class MathUtils {
         return validNum;
     }
 
+    @SuppressWarnings("unused")
     public static double median(double[] values) {
         double median = 0;
         double[] validNum = evaluateData(values);
