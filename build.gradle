@@ -16,6 +16,7 @@ apply plugin: 'java'
 jar.baseName = 'JProbStats'
 group = 'com.JProbStats.stat'
 
+apply from: file('./gradle/check.gradle')
 repositories {
     mavenCentral()
     maven { url 'https://artifactory.quixey.com/artifactory/repo' }

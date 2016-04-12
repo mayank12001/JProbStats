@@ -1,0 +1,48 @@
+task fastCheck(type: Test) {
+
+    systemProperty 'env', 'test'
+    environment('KLOUDY', 'local-store')
+
+    useJUnit {
+    }
+
+    // checks for code problems (e.g. unused stuff)
+    apply plugin: 'pmd'
+    tasks.withType(Pmd) {
+        reports.html.enabled true
+                
+        ignoreFailures = true
+    }
+
+
+    // checks code coverage
+    apply plugin: 'jacoco'
+    jacocoTestReport {
+        reports {
+            html.destination "${buildDir}/jacoco-html"
+            html.enabled = true
+            xml.enabled = true
+        }
+    }
+
+    // check for bad style
+    apply plugin: 'findbugs'
+    findbugs {
+        toolVersion = "3.0.0"
+        sourceSets = [sourceSets.main]
+        
+        ignoreFailures = true // temporary
+    }
+
+    tasks.withType(FindBugs) {
+        reports {
+            xml.enabled = true
+            html.enabled = false
+        }
+    }
+
+    check.dependsOn jacocoTestReport
+
+}
+
+
