@@ -1,9 +1,10 @@
 package com.jprobstats.stats.descriptive;
 
+import com.jprobstats.stats.utils.MathUtils;
+
 public class StandardDev implements UnivariateStatistic {
     private Mean mean = new Mean();
 
-    @SuppressWarnings({"unused"})
     @Override
     public double evaluate(double[] values) throws Exception {
         double computedMean = mean.evaluate(values);
@@ -16,8 +17,8 @@ public class StandardDev implements UnivariateStatistic {
         if (comValue == null)
             throw new Exception("Invalid argument of double array");
 
-        double stdDev = Math.sqrt(MathUtils.sumOfSquares(comValue)/ comValue.length) ;
-        
+        double stdDev = Math.sqrt(MathUtils.sumOfSquares.apply(comValue) / comValue.length);
+
         return stdDev;
     }
 }

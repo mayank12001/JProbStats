@@ -2,16 +2,16 @@ package com.jprobstats.stats.descriptive;
 
 import com.jprobstats.stats.utils.MathUtils;
 
-public class Mean implements UnivariateStatistic {
-
-    private Sum sum = new Sum();
-
+public class Sum implements UnivariateStatistic {
     @Override
     public double evaluate(double[] values) throws Exception {
+        double sum = 0;
         double[] evalValue = MathUtils.evaluateData(values);
-        double computedSum = sum.evaluate(evalValue);
-        double mean = computedSum / values.length;
-        return mean;
+        for (int i = 0; i < evalValue.length; i++) {
+            sum += evalValue[i];
+        }
+        return sum;
     }
+
 
 }
