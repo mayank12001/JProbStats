@@ -2,6 +2,10 @@ package com.ml.vector;
 
 public class VectorMatrixUtil {
 
+    private VectorMatrixUtil() {
+        
+    }
+    
     public static VectorMatrix toMatrix(Vector... vectors) {
 
         double[][] matrix = new double[vectors.length][];
