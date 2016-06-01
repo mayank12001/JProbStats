@@ -9,13 +9,13 @@ public class VectorMatrix {
     public VectorMatrix(double[][] ds) {
         rows = ds.length;
         columns = ds[0].length;
-        for (int i =1; i<rows; i++) {
+        for (int i = 1; i < rows; i++) {
             double[] t = ds[i];
             if (columns != t.length) {
                 throw new IllegalArgumentException("Element " + t + " is of varying length.");
             }
         }
-        matrix = ds;        
+        matrix = ds;
     }
 
     public double[][] getMatrix() {
@@ -28,5 +28,16 @@ public class VectorMatrix {
 
     public int getColumns() {
         return columns;
+    }
+
+    public Vector getIthRow(int index) {
+        double[] elements = matrix[index];
+        return new Vector(elements);
+    }
+
+    public Vector getJthColumn(int index) {
+        VectorMatrix transposedMatrix = VectorMatrixUtil.transpose(this);
+        double[] elements = transposedMatrix.getMatrix()[index];
+        return new Vector(elements);
     }
 }
