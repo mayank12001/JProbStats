@@ -48,9 +48,36 @@ public class KMeansPlusPlusClusterer<T extends Clusterable> extends Clusterer<T>
         }
         // create the initial clusters
         List<CentroidCluster<T>> clusters = chooseInitialCenters(points);
+        int[] assignments = new int[points.size()];
+        assignPointsToClusters(clusters, points, assignments);
 
         return clusters;
     }
+    private void assignPointsToClusters(List<CentroidCluster<T>> clusters, Collection<T> points, int[] assignments) {
+        for (final T point : points) {
+            int clusterIndex = getNearestCluster(clusters, point);
+            CentroidCluster<T> cluster = clusters.get(clusterIndex);
+            cluster.addPoint(point);
+        }
+
+    }
+
+    private int getNearestCluster(List<CentroidCluster<T>> clusters, T point) {
+        double minDistance = Double.MAX_VALUE;
+        int clusterIndex = 0;
+        int nearCluster = 0;
+        for (final CentroidCluster<T> cluster : clusters) {
+            double d = distance(cluster.getCenter(), point);
+            if (d < minDistance) {
+                minDistance = d;
+                nearCluster = clusterIndex;
+            }
+            clusterIndex++;
+        }
+        return nearCluster;
+    }
+
+  
 
     private List<CentroidCluster<T>> chooseInitialCenters(Collection<T> points) throws DimensionMismatchException {
         List<T> pointList = Collections.unmodifiableList(new ArrayList<T>(points));
