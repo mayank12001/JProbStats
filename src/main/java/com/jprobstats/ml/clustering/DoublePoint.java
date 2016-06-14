@@ -12,7 +12,7 @@ public class DoublePoint implements Clusterable, Serializable {
 
     @Override
     public double[] getPoint() {
-        return null;
+        return points;
     }
 
 }
