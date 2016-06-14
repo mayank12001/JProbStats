@@ -47,7 +47,7 @@ public abstract class Clusterer<T extends Clusterable> {
      * @return a list of clusters
      * @throws Exception
      */
-    public abstract List<? extends Cluster<T>> cluster(Collection<T> points) throws MathIllegalArgumentException;
+    public abstract List<CentroidCluster<T>> cluster(Collection<T> points) throws MathIllegalArgumentException;
 
     /**
      * Returns the {@link DistanceMeasure} instance used by this clusterer.
