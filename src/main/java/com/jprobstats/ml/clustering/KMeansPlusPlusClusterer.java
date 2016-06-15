@@ -6,6 +6,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.jprobstats.ml.distance.DistanceMeasure;
 import com.jprobstats.ml.distance.EuclideanDistance;
 import com.jprobstats.ml.exception.DimensionMismatchException;
@@ -14,13 +17,14 @@ import com.jprobstats.ml.util.MathUtils;
 
 public class KMeansPlusPlusClusterer<T extends Clusterable> extends Clusterer<T> {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(KMeansPlusPlusClusterer.class);
 
     /** The number of clusters. */
     private final int k;
     private final int maxIterations;
     /** Picking initial seeds */
     private final Random random;
-    
+
 
     // Constructors
     // ------------------------------------------------------------------------
@@ -46,8 +50,7 @@ public class KMeansPlusPlusClusterer<T extends Clusterable> extends Clusterer<T>
     }
 
     @Override
-    public  List<CentroidCluster<T>> cluster(Collection<T> points) throws DimensionMismatchException {
-
+    public List<CentroidCluster<T>> cluster(Collection<T> points) throws DimensionMismatchException {
         // sanity checks
         MathUtils.checkNotNull(points);
         // number of clusters has to be smaller or equal the number of data points
@@ -55,14 +58,18 @@ public class KMeansPlusPlusClusterer<T extends Clusterable> extends Clusterer<T>
             throw new NumberIsTooSmallException("Total number of points are less than total number of clusters.");
         }
         // create the initial clusters
+        LOGGER.info("Number of data points :: {}", points.size());
+        LOGGER.info("Clusters size :: {}", k);
+
         List<CentroidCluster<T>> clusters = chooseInitialCenters(points);
+        LOGGER.info("Choosen initial seeds successfully.");
         int[] assignments = new int[points.size()];
         assignPointsToClusters(clusters, points, assignments);
-
+        LOGGER.info("Initial assignment is done  successfully.");
         final int max = maxIterations < 0 ? Integer.MAX_VALUE : maxIterations;
-        for(int i=0;i<max;i++) {
-            List<CentroidCluster<T>> newClusters=new ArrayList<CentroidCluster<T>>();
-            for(final CentroidCluster<T> cluster : clusters) {
+        for (int i = 0; i < max; i++) {
+            List<CentroidCluster<T>> newClusters = new ArrayList<CentroidCluster<T>>();
+            for (final CentroidCluster<T> cluster : clusters) {
                 final Clusterable newCenter;
                 newCenter = centroidOf(cluster.getPoints(), cluster.getCenter().getPoint().length);
                 newClusters.add(new CentroidCluster<T>(newCenter));
@@ -75,34 +82,34 @@ public class KMeansPlusPlusClusterer<T extends Clusterable> extends Clusterer<T>
                 return clusters;
             }
         }
-
+        LOGGER.info("Max iterations and final assignment done successfully");
         return clusters;
     }
 
     private Clusterable centroidOf(List<T> points, int length) {
         double[] centroid = new double[length];
-        for(T p:points) {
-            final double[] point=p.getPoint();
-            for(int i=0;i<point.length;i++) {
-                centroid[i]+=point[i];
-            }       
+        for (T p : points) {
+            final double[] point = p.getPoint();
+            for (int i = 0; i < point.length; i++) {
+                centroid[i] += point[i];
+            }
         }
-        for(int i=0;i<centroid.length;i++) {
-            centroid[i]/=points.size();
+        for (int i = 0; i < centroid.length; i++) {
+            centroid[i] /= points.size();
         }
-       return new DoublePoint(centroid);
+        return new DoublePoint(centroid);
     }
 
     private int assignPointsToClusters(List<CentroidCluster<T>> clusters, Collection<T> points, int[] assignments) {
         int assignedDifferently = 0;
-        int pointIndex =0;
+        int pointIndex = 0;
         for (final T point : points) {
             int clusterIndex = getNearestCluster(clusters, point);
             if (clusterIndex != assignments[pointIndex]) {
                 assignedDifferently++;
             }
             CentroidCluster<T> cluster = clusters.get(clusterIndex);
-            assignments[pointIndex++]= clusterIndex;
+            assignments[pointIndex++] = clusterIndex;
             cluster.addPoint(point);
         }
         return assignedDifferently;

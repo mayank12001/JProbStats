@@ -1,5 +1,7 @@
 package com.jprobstats.ml.clustering;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,18 +10,19 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.jprobstats.ml.exception.NullArgumentException;
 
 import au.com.bytecode.opencsv.CSVReader;
 
 public class KMeansPlusPlusClustererTest {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(KMeansPlusPlusClustererTest.class);
-
     private Collection<Clusterable> vectors = new ArrayList<Clusterable>();
+    private CSVReader reader;
+    private KMeansPlusPlusClusterer<Clusterable> kMeansClusterer;
 
 
     // Setup
@@ -27,7 +30,8 @@ public class KMeansPlusPlusClustererTest {
 
     @Before
     public void setup() throws IOException {
-        CSVReader reader = new CSVReader(new FileReader("src/test/resources/data.csv"));
+        kMeansClusterer = new KMeansPlusPlusClusterer<Clusterable>(3);
+        reader = new CSVReader(new FileReader("src/test/resources/data.csv"));
         List<String[]> records = reader.readAll();
         Set<double[]> data = records.stream().map(record -> {
             double[] nums = new double[record.length];
@@ -41,12 +45,29 @@ public class KMeansPlusPlusClustererTest {
         });
     }
 
+    @After
+    public void teardown() throws IOException {
+        reader.close();
+        kMeansClusterer = null;
+    }
+
+
+
+    // Tests
+    // ------------------------------------------------------------------------
+
+    @Test(expected = NullArgumentException.class)
+    public void test_cluster_null() {
+        Collection<Clusterable> vectors = null;
+        List<CentroidCluster<Clusterable>> clusters = kMeansClusterer.cluster(vectors);
+    }
+
     @Test
     public void test_cluster() {
-
-        KMeansPlusPlusClusterer<Clusterable> kMeansClusterer = new KMeansPlusPlusClusterer<Clusterable>(2);
         List<CentroidCluster<Clusterable>> clusters = kMeansClusterer.cluster(vectors);
-        LOGGER.debug(clusters.toString());
+        assertEquals(3, clusters.size());
+
+
     }
 
 

@@ -15,4 +15,20 @@ public class DoublePoint implements Clusterable, Serializable {
         return points;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        str.append("[");
+        for (int i = 0; i < points.length; i++) {
+
+            String s = Double.toString(points[i]);
+            str.append(s);
+            if (i != points.length - 1)
+                str.append(",");
+        }
+        str.append("]");
+        return str.toString();
+
+    }
+
 }
