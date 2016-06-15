@@ -46,6 +46,12 @@ dependencies {
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
     compile group: 'commons-io', name: 'commons-io', version: '2.4'
     
+    //CSV file parsing
+    compile group: 'net.sf.opencsv', name: 'opencsv', version: '2.3'
+    
+    //test compilations
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    
 }
 
 test {
