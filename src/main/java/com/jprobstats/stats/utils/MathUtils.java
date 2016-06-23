@@ -123,5 +123,5 @@ public class MathUtils {
         List<Double> listValues = IteratorUtils.toList(iter);
         return evaluateData(listValues);
     }
-   
+
 }

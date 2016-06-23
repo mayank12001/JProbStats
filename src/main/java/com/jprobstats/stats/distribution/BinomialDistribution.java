@@ -34,7 +34,6 @@ public class BinomialDistribution {
              * ret = SaddlePointExpansion.logBinomialProbability(x, numberOfTrials,
              * probabilityOfSuccess, 1.0 - probabilityOfSuccess); }
              */
-
             BigInteger trailFact = MathUtils.computefactorial(noOfTrails);
             BigInteger xFact = MathUtils.computefactorial(x).multiply(MathUtils.computefactorial(noOfTrails - x));
             double numberOfOutcomes = trailFact.divide(xFact).doubleValue();
