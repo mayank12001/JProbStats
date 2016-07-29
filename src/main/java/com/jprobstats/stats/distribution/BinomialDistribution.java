@@ -1,9 +1,5 @@
 package com.jprobstats.stats.distribution;
 
-import java.math.BigInteger;
-
-import com.jprobstats.stats.utils.MathUtils;
-
 public class BinomialDistribution {
 
     private final int noOfTrails;
@@ -30,17 +26,8 @@ public class BinomialDistribution {
         if (x < 0 || x > noOfTrails) {
             ret = Double.NEGATIVE_INFINITY;
         } else {
-            /*
-             * ret = SaddlePointExpansion.logBinomialProbability(x, numberOfTrials,
-             * probabilityOfSuccess, 1.0 - probabilityOfSuccess); }
-             */
-
-            BigInteger trailFact = MathUtils.computefactorial(noOfTrails);
-            BigInteger xFact = MathUtils.computefactorial(x).multiply(MathUtils.computefactorial(noOfTrails - x));
-            double numberOfOutcomes = trailFact.divide(xFact).doubleValue();
-            double probTrails = Math.pow(probOfSuccess, x) * Math.pow(1 - probOfSuccess, noOfTrails - x);
-            double output = numberOfOutcomes * probTrails;
-            ret = output;
+            ret = Math.exp(
+                    SaddlePointExpansion.logBinomialProbability(x, noOfTrails, probOfSuccess, 1.0 - probOfSuccess));
         }
         return ret;
     }

@@ -20,6 +20,9 @@ public class MathUtils {
 
     public static final double PI_SQUARED = PI * PI;
 
+
+    private static final double TWO_POWER_52 = 4503599627370496.0;
+
     private MathUtils() {}
 
     public static Function<double[], Double> sumOfSquares = (value) -> {
@@ -123,5 +126,32 @@ public class MathUtils {
         List<Double> listValues = IteratorUtils.toList(iter);
         return evaluateData(listValues);
     }
-   
+    /**
+     * Get the largest whole number smaller than x.
+     * 
+     * @param x number from which floor is requested
+     * @return a double number f such that f is an integer f <= x < f + 1.0
+     */
+    public static double floor(double x) {
+        long y;
+
+        if (x != x) { // NaN
+            return x;
+        }
+
+        if (x >= TWO_POWER_52 || x <= -TWO_POWER_52) {
+            return x;
+        }
+
+        y = (long) x;
+        if (x < 0 && y != x) {
+            y--;
+        }
+
+        if (y == 0) {
+            return x * y;
+        }
+
+        return y;
+    }
 }
