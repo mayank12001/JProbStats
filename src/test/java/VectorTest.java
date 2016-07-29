@@ -1,7 +1,7 @@
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.ml.vector.Vector;
+import com.jprobstats.ml.vector.Vector;
 
 public class VectorTest {
 

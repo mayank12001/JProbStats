@@ -1,4 +1,4 @@
-package com.ml.vector;
+package com.jprobstats.ml.vector;
 
 public class VectorUtil {
 
