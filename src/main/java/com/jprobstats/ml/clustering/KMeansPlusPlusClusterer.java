@@ -11,9 +11,9 @@ import org.slf4j.LoggerFactory;
 
 import com.jprobstats.ml.distance.DistanceMeasure;
 import com.jprobstats.ml.distance.EuclideanDistance;
-import com.jprobstats.ml.exception.DimensionMismatchException;
-import com.jprobstats.ml.exception.NumberIsTooSmallException;
-import com.jprobstats.ml.util.MathUtils;
+import com.jprobstats.stats.exception.DimensionMismatchException;
+import com.jprobstats.stats.exception.NumberIsTooSmallException;
+import com.jprobstats.stats.utils.MathUtils;
 
 public class KMeansPlusPlusClusterer<T extends Clusterable> extends Clusterer<T> {
 

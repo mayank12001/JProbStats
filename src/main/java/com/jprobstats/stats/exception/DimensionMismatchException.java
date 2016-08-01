@@ -1,9 +1,11 @@
 package com.jprobstats.stats.exception;
 
-public class DimensionMismatchException extends Exception {
+public class DimensionMismatchException extends MathIllegalArgumentException {
+    private static final long serialVersionUID = 6759290808637480268L;
 
-    public DimensionMismatchException(int actual, int expectedLen) {
-        // TODO Auto-generated constructor stub
+    public DimensionMismatchException(String message) {
+        super(message);
+
     }
 
 }

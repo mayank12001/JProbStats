@@ -43,9 +43,7 @@ dependencies {
     compile group: 'commons-io', name: 'commons-io', version: '2.4'
     compile group: 'net.sf.opencsv', name: 'opencsv', version: '2.3'
     compile group: 'commons-collections', name: 'commons-collections', version: '3.2.2'
-    compile group: 'com.github.yannrichet', name: 'JMathPlot', version: '1.0.1'
-    compile group: 'org.apache.commons', name: 'commons-math3', version: '3.2'
-    
+      
      //test compilations
     testCompile group: 'junit', name: 'junit', version: '4.12'
     

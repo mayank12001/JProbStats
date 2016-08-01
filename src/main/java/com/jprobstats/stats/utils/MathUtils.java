@@ -9,6 +9,8 @@ import java.util.function.Function;
 
 import org.apache.commons.collections.IteratorUtils;
 
+import com.jprobstats.stats.exception.NullArgumentException;
+
 public class MathUtils {
     /** Archimede's constant PI, ratio of circle circumference to diameter. */
     public static final double PI = 105414357.0 / 33554432.0 + 1.984187159361080883e-9;
@@ -154,4 +156,18 @@ public class MathUtils {
 
         return y;
     }
+    
+    /**
+     * Checks that an object is not null.
+     *
+     * @param o Object to be checked.
+     * @throws NullArgumentException if {@code o} is {@code null}.
+     */
+    public static void checkNotNull(Object o)
+        throws NullArgumentException {
+        if (o == null) {
+            throw new NullArgumentException("Given input is null");
+        }
+    }
+    
 }

@@ -9,10 +9,9 @@ import java.util.List;
  */
 
 public class Cluster<T extends Clusterable> implements Serializable {
-
-
+    private static final long serialVersionUID = -5692045541644302476L;
     private final List<T> points;
-   
+
     /**
      * Build a cluster centered at a specified point.
      */
@@ -22,6 +21,7 @@ public class Cluster<T extends Clusterable> implements Serializable {
 
     /**
      * Add a point to this cluster.
+     * 
      * @param point point to add
      */
     public void addPoint(final T point) {

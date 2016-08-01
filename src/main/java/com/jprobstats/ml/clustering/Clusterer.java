@@ -4,8 +4,8 @@ import java.util.Collection;
 import java.util.List;
 
 import com.jprobstats.ml.distance.DistanceMeasure;
-import com.jprobstats.ml.exception.DimensionMismatchException;
-import com.jprobstats.ml.exception.MathIllegalArgumentException;
+import com.jprobstats.stats.exception.DimensionMismatchException;
+import com.jprobstats.stats.exception.MathIllegalArgumentException;
 
 /**
  * Base class for clustering n-dimensional points.

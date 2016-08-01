@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class DoublePoint implements Clusterable, Serializable {
 
+    private static final long serialVersionUID = -6759577827555802136L;
     private final double[] points;
 
     public DoublePoint(double[] points) {

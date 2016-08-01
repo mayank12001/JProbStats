@@ -1,7 +1,7 @@
 package com.jprobstats.ml.distance;
 
-import com.jprobstats.ml.exception.DimensionMismatchException;
 import com.jprobstats.ml.util.MathArrays;
+import com.jprobstats.stats.exception.DimensionMismatchException;
 
 /**
  * Calculates Euclidean Distance between two points

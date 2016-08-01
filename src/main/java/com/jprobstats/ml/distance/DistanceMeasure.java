@@ -2,7 +2,7 @@ package com.jprobstats.ml.distance;
 
 import java.io.Serializable;
 
-import com.jprobstats.ml.exception.DimensionMismatchException;
+import com.jprobstats.stats.exception.DimensionMismatchException;
 
 /**
  * Base interface to measure the distance between two points.

@@ -1,6 +1,6 @@
 package com.jprobstats.ml.util;
 
-import com.jprobstats.ml.exception.DimensionMismatchException;
+import com.jprobstats.stats.exception.DimensionMismatchException;
 
 public class MathArrays {
     /**

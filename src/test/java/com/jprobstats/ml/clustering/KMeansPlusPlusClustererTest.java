@@ -14,7 +14,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.jprobstats.ml.exception.NullArgumentException;
+import com.jprobstats.stats.exception.NullArgumentException;
 
 import au.com.bytecode.opencsv.CSVReader;
 
